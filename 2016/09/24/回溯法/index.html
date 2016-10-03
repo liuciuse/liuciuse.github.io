@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>回溯法 | 雷凯&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、回溯法 - 深度优先搜索1.简单概述  回溯法思路的简单描述是：把问题的解空间转化成了图或者树的结构表示，然后使用深度优先搜索策略进行遍历，遍历的过程中记录和寻找所有可行解或者最优解。基本思想类同于：图的深度优先搜索、二叉树的后序遍历【分支限界法：广度优先搜索 思想类似于：图的广度优先遍历】
+2.详细描述回溯法按深度优先策略搜索问题的解空间树。首先从根节点出发搜索解空间树，当算法搜索至解空间树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回溯法">
+<meta property="og:url" content="http://yoursite.com/2016/09/24/回溯法/index.html">
+<meta property="og:site_name" content="雷凯's Blog">
+<meta property="og:description" content="一、回溯法 - 深度优先搜索1.简单概述  回溯法思路的简单描述是：把问题的解空间转化成了图或者树的结构表示，然后使用深度优先搜索策略进行遍历，遍历的过程中记录和寻找所有可行解或者最优解。基本思想类同于：图的深度优先搜索、二叉树的后序遍历【分支限界法：广度优先搜索 思想类似于：图的广度优先遍历】
+2.详细描述回溯法按深度优先策略搜索问题的解空间树。首先从根节点出发搜索解空间树，当算法搜索至解空间树">
+<meta property="og:updated_time" content="2016-09-29T12:11:09.856Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="回溯法">
+<meta name="twitter:description" content="一、回溯法 - 深度优先搜索1.简单概述  回溯法思路的简单描述是：把问题的解空间转化成了图或者树的结构表示，然后使用深度优先搜索策略进行遍历，遍历的过程中记录和寻找所有可行解或者最优解。基本思想类同于：图的深度优先搜索、二叉树的后序遍历【分支限界法：广度优先搜索 思想类似于：图的广度优先遍历】
+2.详细描述回溯法按深度优先策略搜索问题的解空间树。首先从根节点出发搜索解空间树，当算法搜索至解空间树">
+  
+    <link rel="alternate" href="/atom.xml" title="雷凯&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">雷凯&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">随心 随笔</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-回溯法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/24/回溯法/" class="article-date">
+  <time datetime="2016-09-24T11:22:57.000Z" itemprop="datePublished">2016-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      回溯法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、回溯法-深度优先搜索"><a href="#一、回溯法-深度优先搜索" class="headerlink" title="一、回溯法 - 深度优先搜索"></a>一、回溯法 - 深度优先搜索</h2><h3 id="1-简单概述"><a href="#1-简单概述" class="headerlink" title="1.简单概述"></a>1.简单概述</h3><p>  回溯法思路的简单描述是：把问题的解空间转化成了图或者树的结构表示，然后使用深度优先搜索策略进行遍历，遍历的过程中记录和寻找所有可行解或者最优解。<br><br>基本思想类同于：图的深度优先搜索、二叉树的后序遍历【分支限界法：广度优先搜索 思想类似于：图的广度优先遍历】</p>
+<h3 id="2-详细描述"><a href="#2-详细描述" class="headerlink" title="2.详细描述"></a>2.详细描述</h3><p>回溯法按深度优先策略搜索问题的解空间树。首先从根节点出发搜索解空间树，当算法搜索至解空间树的某一节点时，先利用剪枝函数判断该节点是否可行（即能得到问题的解）。如果不可行，则跳过对该节点为根的子树的搜索，逐层向其祖先节点回溯；否则，进入该子树，继续按照深度优先策略搜索。<br><br>回溯法的基本行为是搜索，搜索过程使用剪枝函数来避免无效的搜索。剪枝函数包括两类：1.使用约束函数，剪去不满足约束条件的路径；2.使用限界函数，剪去不能得到最优解的路径。<br><br>问题的关键在于如何定义问题的解空间，转化成树（即解空间树）。解空间树分为两种：子集树和排列树。</p>
+<h3 id="3-回溯法应用"><a href="#3-回溯法应用" class="headerlink" title="3.回溯法应用"></a>3.回溯法应用</h3><p>当问题是要求满足某种性质（约束条件）的所有解或最优解时，往往使用回溯法。</p>
+<p>使用回溯法的一些注意事项：<br>1.回溯法毕竟使用的是函数调用的方法，其必须要返回。要注意函数调用的深度，即回溯法试探的路径长度。<br>2.回溯法在进行下一个可行节点的选择的时候要进行剪枝，减少访问的分支数量。<br>3.回溯法在进行设计的时候一定要注意进行状态恢复，即要求任意某节点访问之前与访问之后的状态是一致的。反映在代码中就是，回溯调用的前后必须保证用来记录状态的变量没有发生变化。所以，最后，在所有的回溯调用结束时，用来记录状态的变量的值是没有发生变化的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/24/回溯法/" data-id="cittsidrq0000igumyoltke7r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/29/多线程模型/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          多线程模型
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/24/动态规划/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">动态规划</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作系统/">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/工程/" style="font-size: 10px;">工程</a> <a href="/tags/操作系统/" style="font-size: 10px;">操作系统</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/09/29/多线程模型/">多线程模型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/24/回溯法/">回溯法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/24/动态规划/">动态规划</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/18/排序算法/">排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/17/设计模式/">设计模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 雷凯<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

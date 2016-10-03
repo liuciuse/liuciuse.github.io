@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>雷凯&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="随心 随笔">
+<meta property="og:type" content="website">
+<meta property="og:title" content="雷凯's Blog">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="雷凯's Blog">
+<meta property="og:description" content="随心 随笔">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="雷凯's Blog">
+<meta name="twitter:description" content="随心 随笔">
+  
+    <link rel="alternate" href="/atom.xml" title="雷凯&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">雷凯&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">随心 随笔</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-多线程模型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/29/多线程模型/" class="article-date">
+  <time datetime="2016-09-29T12:13:51.000Z" itemprop="datePublished">2016-09-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/29/多线程模型/">多线程模型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="线程的基本概念"><a href="#线程的基本概念" class="headerlink" title="线程的基本概念"></a>线程的基本概念</h3><p></p><p>引入进程的目的，是为了使多道程序并发执行，以提高资源利用率和系统吞吐量；而引入线程，则是为了减小程序在并发执行时所付出的时空开销，提高操作系统的并发性能。</p>
+<p></p><p>线程最直接的理解就是“轻量级进程”，它是一个基本的CPU执行单元，也是程序执行流的最小单元，由线程ID、程序计数器、寄存器集合和堆栈组成。线程是进程中的一个实体，是被系统独立调度和分派的基本单位，线程自己不拥有系统资源，只拥有一点在运行中必不可少的资源，但它可与同属一个进程的其他线程共享进程所拥有的全部资源。一个线程可以创建和撤销另一个线程，同一个进程中的多个线程之间可以并发执行。由于线程之间的相互制约，致使线程在运行中呈现出间断性。线程也有就绪、阻塞和运行三种基本状态。</p>
+<p></p><p>引入线程后，进程的内核发生了改变，进程只作为除CPU之外系统资源的分配单元，线程则作为处理机的分配单元。</p>
+<h3 id="线程与进程的比较"><a href="#线程与进程的比较" class="headerlink" title="线程与进程的比较"></a>线程与进程的比较</h3><p></p><p>1）调度。在传统的操作系统中，拥有资源和独立调度的基本单位都是进程。在引入线程的操作系统中，线程是独立调度的基本单位，进程是资源拥有的基本单位。在同一进程中，线程的切换不会引起进程切换。在不同进程中进行线程切换，如从一个进程中的线程切换到另一个进程中的线程时，会引起进程切换。</p>
+<p></p><p>2)拥有资源。不论是传统操作系统还是设有线程的操作系统，进程都是拥有资源的基本单位，而线程不拥有系统资源（也有一点必不可少的资源），但线程可以访问其隶属进程的系统资源。</p>
+<p></p><p>3）并发性。在引入线程的操作系统中，不仅进程之间可以并发执行，而且多个线程之间也可以并发执行，从而使操作系统具有更好的并发性，提高了系统的吞吐量。</p>
+<p></p><p>4)系统开销。由于创建或撤销进程时，系统都要为之分配或回收资源，如内存空间、I/O设备等，因此操作系统所付出的开销远大于创建或撤销线程时的开销。类似地，在进行进程切换时，涉及当前执行进程CPU环境的保存及新调度到进程CPU环境的设置，而线程切换时只需要保存和设置少量寄存器内存，开销很小。此外，由于同一进程内的多个线程共享进程的地址空间，因此，这些线程之间的同步与通信非常容易实现，甚至无需操作系统的干预。</p>
+<p></p><p>5)地址空间和其他资源（如打开的文件）：进程的地址空间之间相互独立，同一进程的个线程间共享进程的资源，某进程内的线程对于其他进程不可见。</p>
+<p></p><p>6)通信方面：进程间通信(IPC)需要进程同步和互斥手段的辅助，以保证数据的一致性，而线程间可以直接读/写进程数据段（如全局变量）来进行通信。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/29/多线程模型/" data-id="cittsids80004igum3lbe2irw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/操作系统/">操作系统</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-回溯法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/24/回溯法/" class="article-date">
+  <time datetime="2016-09-24T11:22:57.000Z" itemprop="datePublished">2016-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/24/回溯法/">回溯法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、回溯法-深度优先搜索"><a href="#一、回溯法-深度优先搜索" class="headerlink" title="一、回溯法 - 深度优先搜索"></a>一、回溯法 - 深度优先搜索</h2><h3 id="1-简单概述"><a href="#1-简单概述" class="headerlink" title="1.简单概述"></a>1.简单概述</h3><p>  回溯法思路的简单描述是：把问题的解空间转化成了图或者树的结构表示，然后使用深度优先搜索策略进行遍历，遍历的过程中记录和寻找所有可行解或者最优解。<br><br>基本思想类同于：图的深度优先搜索、二叉树的后序遍历【分支限界法：广度优先搜索 思想类似于：图的广度优先遍历】</p>
+<h3 id="2-详细描述"><a href="#2-详细描述" class="headerlink" title="2.详细描述"></a>2.详细描述</h3><p>回溯法按深度优先策略搜索问题的解空间树。首先从根节点出发搜索解空间树，当算法搜索至解空间树的某一节点时，先利用剪枝函数判断该节点是否可行（即能得到问题的解）。如果不可行，则跳过对该节点为根的子树的搜索，逐层向其祖先节点回溯；否则，进入该子树，继续按照深度优先策略搜索。<br><br>回溯法的基本行为是搜索，搜索过程使用剪枝函数来避免无效的搜索。剪枝函数包括两类：1.使用约束函数，剪去不满足约束条件的路径；2.使用限界函数，剪去不能得到最优解的路径。<br><br>问题的关键在于如何定义问题的解空间，转化成树（即解空间树）。解空间树分为两种：子集树和排列树。</p>
+<h3 id="3-回溯法应用"><a href="#3-回溯法应用" class="headerlink" title="3.回溯法应用"></a>3.回溯法应用</h3><p>当问题是要求满足某种性质（约束条件）的所有解或最优解时，往往使用回溯法。</p>
+<p>使用回溯法的一些注意事项：<br>1.回溯法毕竟使用的是函数调用的方法，其必须要返回。要注意函数调用的深度，即回溯法试探的路径长度。<br>2.回溯法在进行下一个可行节点的选择的时候要进行剪枝，减少访问的分支数量。<br>3.回溯法在进行设计的时候一定要注意进行状态恢复，即要求任意某节点访问之前与访问之后的状态是一致的。反映在代码中就是，回溯调用的前后必须保证用来记录状态的变量没有发生变化。所以，最后，在所有的回溯调用结束时，用来记录状态的变量的值是没有发生变化的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/24/回溯法/" data-id="cittsidrq0000igumyoltke7r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-动态规划" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/24/动态规划/" class="article-date">
+  <time datetime="2016-09-24T11:22:57.000Z" itemprop="datePublished">2016-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/24/动态规划/">动态规划</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h2><p>多阶段决策过程是指这样一类特殊的活动过程，过程可以按照时间顺序分解成若干个相互联系的阶段，在每一个阶段都需要做出决策，全部过程的决策时一个决策序列。动态规划算法是解决多阶段决策过程最优化问题的一种常用方法，难度比较大，技巧性也很强。利用动态规划算法，可以优雅而高效的解决很多贪婪算法或者分支算法不能解决的问题。动态规划算法的基本思想是：将待求解的问题分解成若干个相互联系的子问题，先求解子问题，然后从这些子问题的解得到原问题的解；对于重复出现的子问题，只在第一次遇到的时候对它进行求解，并把答案保存起来，让以后再次遇到时直接引用答案，不必重新求解。动态规划算法将问题的解决方案视为一系列决策的结果，与贪婪算法不同的是，在贪婪算法中，每采用一次贪婪准则，便做出一个不可撤回的决策；而在动态规划算法中，还有考察每个最优决策序列中是否包含一个最优决策子序列，即问题是否具有最优子结构性质。<br><br>动态规划算法的有效性依赖于带求解问题本身的两个重要性质：最优子结构性质和子问题重叠性质。<br><br>1、最优子结构性质。如果问题的最优解所包含的子问题的解也是最优的，我们就称该问题具有最优子结构性质（即满足最优化原理）。最优子结构性质为动态规划算法解决问题提供了重要线索。<br><br>2、子问题重叠性质。子问题重叠性质是指在用递归算法自顶向下对问题进行求解时，每次产生的子问题并不总是新问题，有些子问题会被重复计算多次。动态规划算法正是利用了这种子问题的重叠性质，对每一个子问题只计算一次，然后将其计算结果保存在一个表格中，当再次需要计算已经计算过的子问题时，只是在表格中简单地查看一下结果，从而获得较高的解题效率。<br><br>当我们已经确定待解决的问题需要用动态规划算法时，通常可以按照一下步骤设计动态规划算法：<br><br>1、分析问题的最优解，找出最优解的性质，并刻画其结构特征；<br><br>2、递归地定义最优值；<br><br>3、采用自底向上的方式计算问题的最优值；<br><br>4、根据计算最优值时得到的信息，构造最优解。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/24/动态规划/" data-id="cittsidry0001igumhu8itlb1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-排序算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/18/排序算法/" class="article-date">
+  <time datetime="2016-09-18T03:23:10.000Z" itemprop="datePublished">2016-09-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/18/排序算法/">排序算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="常见排序算法小结"><a href="#常见排序算法小结" class="headerlink" title="常见排序算法小结"></a>常见排序算法小结</h2><p><img src="http://hi.csdn.net/attachment/201105/24/0_1306225542srVx.gif" alt="排序算法图"></p>
+<h3 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h3><ol>
+<li>思想：每次选择一个元素K插入到之前已排好序的部分A[1…i]中，插入过程中K依次由后向前与A[1…i]中的元素进行比较。若发现A[x]&gt;=K，则将K插入到A[x]的后面，插入前需要移动元素。<br><img src="http://hi.csdn.net/attachment/201105/24/0_13062255433oJI.gif" alt="插入结构图"></li>
+<li>算法时间复杂度。<br> 最好情况下：正序有序（从小到大），这样只需要比较n次，不需要移动。因此时间复杂度O(n)。 <br>最坏情况下：逆序有序，这样每个元素就都需要比较n次，共有n个元素，因此实际复杂度为O（n^{2}）。 <br>平均情况下：O(n^{2})。</li>
+<li>稳定性。<br>稳定性，就是有两个相同的元素，排序先后的相对位置是否变化，主要用在排序时有多个排序规则的情况下。<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3></li>
+<li>思想：希尔排序也是一种插入排序方法，实际上是一种分组插入方法先取定一个小于n的整数d1作为第一个增量，把表的全部记录分成d1个组，所有距离为d1的倍数的记录放在同一个组中，在各组内进行直接插入排序；然后，取第二个增量d2（&lt;d1），重复上述的分组和排序，直至所取的增量dt=1（dt&lt;dt-1&lt;…&lt;d2&lt;d1）,即所有记录放在同一组中进行直接插入排序为止。</li>
+<li>时间复杂度。<br>最好情况：与步长d的选择有很多关系。<br>最坏情况：O(N*logN)。 <br> 平均情况：O(N*logN)。</li>
+<li>稳定性。<br>每组插入排序是稳定的，但是相同元素在各组内是独立移动的，最后其稳定性就会被打乱，所有shell排序是不稳定的。<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3></li>
+<li>基本思想：通过无序区中相邻记录关键字间的比较和位置的交换，使关键字最小的记录如气泡一般逐渐往上“漂浮”直至“水面”。<br><img src="http://hi.csdn.net/attachment/201105/24/0_130622555127dJ.gif" alt="过程图"></li>
+<li>时间复杂度。<br>最好情况下：正序有序，则只需要比较n次。为O(n)。<br>最坏情况下：逆序有序，则需要比较(n-1)+(n-2)+…+1，故，为O(N*N)。</li>
+<li>稳定性。<br>排序过程中只交换相邻两个元素的位置。因此，当两个数相等时，是没必要交换两个数的位置的。所有，他们的相对位置并没有改变，冒泡排序算法是稳定的。<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3></li>
+<li>思想：由冒泡排序改进而来的。在待排序的n个记录中任取一个记录（通常去第一个记录），把该记录放入适当位置后，数据序列被此记录划分成两部分。所有关键字比该记录关键字小的记录放置在前一部分，所有比它大的记录放置在后一部分，并把该记录排在两部分的中间（称为该记录归位），这个过程称作一趟快速排序。<br><img src="http://hi.csdn.net/attachment/201105/24/0_1306225557eV2Y.gif" alt="排序过程图"></li>
+<li>算法复杂度。<br>最好的情况：因为每次都将序列分为两个部分，故为O(N*logN)。<br>最坏的情况：基本有序时，退化为冒泡排序，故为O(N*N)。</li>
+<li>稳定性。<br>由于每次都需要和中轴元素变换，因此原来的顺序就可能被打乱。如序列为5 3 3 4 3 8 9 10 11会将3的顺序打乱。所以，快速排序是不稳定的！<h3 id="直接选择排序"><a href="#直接选择排序" class="headerlink" title="直接选择排序"></a>直接选择排序</h3></li>
+<li>思想：首先在未排序序列中找到最小元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小元素，然后放到排序序列末尾。依次类推，直到所有元素均排序完成。具体做法是：选择最小的元素与未排序部分的首部交换，使得序列的前面为有序。<br><img src="http://hi.csdn.net/attachment/201105/24/0_1306225561D6cL.gif" alt="排序示意图"></li>
+<li>时间复杂度。<br>最好情况下：交换0次，但是每次都要找到最小的元素，因此大约必须遍历N*N次，因此为O(N*N)。减少了交换次数。<br>最坏情况下，平均情况下：O(N*N)</li>
+<li>稳定性。<br>由于每次都是选取未排序序列A中的最小元素X与A中的第一个元素交换，因此跨距离了，很可能破坏了元素间的相对位置（有交换后位置前的相同元素，但不是最小的），因此选择排序是不稳定的。<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3></li>
+<li>思想：利用完全二叉树中双亲节点和孩子节点之间的内在关系，在当前无序区中选择关键字最大（或者最小）的记录。<br><img src="http://hi.csdn.net/attachment/201105/24/0_1306225564393a.gif" alt=""></li>
+<li>算法复杂度<br>最坏情况下，接近于最差情况下：O(N*logN)。</li>
+<li>稳定性。<br>堆排序需要不断地调整堆，因此它是一种不稳定的排序。<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3></li>
+<li>思想：多次将两个或两个以上的有序表合并成一个新的有序表。<br><img src="http://hi.csdn.net/attachment/201105/24/0_1306225570mW6M.gif" alt=""></li>
+<li>算法时间复杂度。<br>最好情况下：一趟归并需要n次，总共需要logN次，因此为O（N*logN）。<br>最坏情况下，接近于平均情况下，为O(N*logN)</li>
+<li>稳定性。<br>归并排序最大的特点就是它是一种稳定的排序算法。归并过程中是不会改变元素的相对位置的。<br>缺点是：它需要O(n)的额外空间。但是很适合于多链表排序。<h3 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h3></li>
+<li>思想：它是一种非比较排序。它是根据位的高低进行排序的，也就是先按个位排序，然后依据十位排序…以次类推。<br><img src="http://hi.csdn.net/attachment/201105/24/0_1306225575fKfh.gif" alt=""><br><img src="http://hi.csdn.net/attachment/201105/24/0_13062255771KD1.gif" alt=""></li>
+<li>算法的时间复杂度。<br>分配需要O(n)，收集为O(r)，其中r为分配后链表的个数，以r=10为例，则有0~9这样10个链表来将原来的序列分类。而d，也就是位数，即“分配-收集”的趟数。因此时间复杂度为O(d*(n+r))</li>
+<li>稳定性。<br>基数排序过程中不改变元素的相对位置，因此是稳定的。</li>
+</ol>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/18/排序算法/" data-id="cittsids60003igumqokfbckc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-设计模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/17/设计模式/" class="article-date">
+  <time datetime="2016-09-17T08:07:07.000Z" itemprop="datePublished">2016-09-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/17/设计模式/">设计模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="常用设计模式"><a href="#常用设计模式" class="headerlink" title="常用设计模式"></a>常用设计模式</h1><h4 id="设计模式的基本原则"><a href="#设计模式的基本原则" class="headerlink" title="设计模式的基本原则"></a>设计模式的基本原则</h4><ol>
+<li>开闭原则<br>定义：一个软件实体如类、模块和函数应该对扩展开放，对修改关闭。</li>
+<li>单一职责原则<br>定义:不要存在多于一个导致类变更的原因.通俗的说,即一个类只负责一项职责.</li>
+<li>里氏替换原则<br>定义1：如果对每一个类型为T1的对象o1，都有类型为T2的对象o2，使得以T1定义的所有程序P在所有的对象o1都代换成o2时，程序P的行为没有发生变化，那么类型T2是类型T1的子类型。<br>定义2：所有引用基类的地方必须能透明地使用其子类对象。</li>
+<li>依赖倒置原则<br>定义：高层模块不应该依赖底层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。<br>问题由来：类A直接依赖类B，假如要将类A改完依赖类C，则必须通过修改类A的代码来达成。这种场景下，类A一般是高层模块，负责复杂的业务逻辑；类B和类C是底层模块，负责基本的原子操作；假如修改类A，会给程序带来不必要的风险。<br>解决方案：将类A修改为依赖接口I，类B和类C各自实现接口I，类A通过接口I间接与类B或者类C发生联系，则会大大降低修改类A的几率。</li>
+<li>接口隔离原则<br>定义：客户端不应该依赖它不需要的接口；一个类对另一个类的依赖应该建立在最小接口上。<br>问题由来：类A通过接口I依赖类B，类C通过接口I依赖类D，如果接口I对类A和类B来说不是最小接口，则类B和类D必须去实现他们不需要的方法。<br>解决方案：将臃肿的接口I拆分为独立的几个接口，类A和类C分别与他们需要的接口建立依赖关系。也就是采用接口隔离原则。</li>
+<li>迪米特法则<br>定义:一个对象应该对其他对象保持最少的了解。<br>问题由来：类与类之间的关系越密切，耦合度越大，当一个类发生改变时，对另一个类的影响也越大。<br>解决方案：尽量降低类与类之间的耦合。</li>
+</ol>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><h3 id="1-第一种形式：懒汉式。"><a href="#1-第一种形式：懒汉式。" class="headerlink" title="1.第一种形式：懒汉式。"></a>1.第一种形式：懒汉式。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonClass</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SingletonClass instance = <span class="keyword">null</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> SingletonClass <span class="title">getInstance</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)</div><div class="line">        &#123;</div><div class="line">            instance = <span class="keyword">new</span> SingletonClass();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SingletonClass</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-第二种形式：饿汉式。"><a href="#2-第二种形式：饿汉式。" class="headerlink" title="2.第二种形式：饿汉式。"></a>2.第二种形式：饿汉式。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    <span class="comment">// 在类内部定义自己的一个实例，直供内部调用</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance = <span class="keyword">new</span> Singleton();</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 提供一个供外部访问本class的静态方法，可以直接访问</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-第三种形式：双重锁形式。"><a href="#3-第三种形式：双重锁形式。" class="headerlink" title="3.第三种形式：双重锁形式。"></a>3.第三种形式：双重锁形式。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 此模式将同步内容下放到if内部，提高了执行效率，不必每次获取对象的时候都进行同步，只有第一次进行创建的时候进行同步。</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">synchronized</span> (Singleton.class)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>)</div><div class="line">                &#123;</div><div class="line">                    instance = <span class="keyword">new</span> Singleton();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><h3 id="Factory-Method模式"><a href="#Factory-Method模式" class="headerlink" title="Factory Method模式"></a>Factory Method模式</h3><p>Factory Method模式在<strong>不同的子工厂类</strong>生成具有<strong>统一界面接口</strong>的对象，一方面，可以不用关心产品对象的具体实现，简化和统一Client调用过程；另一方面，可以让整个系统具有灵活的可扩展性。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BallFactory</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> Ball <span class="title">makeBall</span><span class="params">()</span></span>;<span class="comment">// Factory Method</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BasketballFact</span> <span class="keyword">extends</span> <span class="title">BallFactory</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> Ball <span class="title">makeBall</span><span class="params">()</span></span>&#123; <span class="comment">//子类实现Factory Method决定实例化哪一个类的</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Basketball();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FootballFact</span> <span class="keyword">extends</span> <span class="title">BallFactory</span></span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> Ball <span class="title">makeBall</span><span class="params">()</span></span>&#123;　　　<span class="comment">//子类实现Factory Method决定实例化哪一个类的  </span></div><div class="line">    　<span class="keyword">return</span> <span class="keyword">new</span> Football();  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="class"><span class="keyword">class</span>　<span class="title">Basketball</span> <span class="keyword">extends</span> <span class="title">Ball</span></span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>&#123;  </div><div class="line">    　System.out.println(<span class="string">"play the basketball"</span>);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Football</span> <span class="keyword">extends</span> <span class="title">Ball</span></span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span>　<span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>&#123;  </div><div class="line">    　System.out.println(<span class="string">"play the football"</span>);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Ball</span></span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">protected</span>　<span class="keyword">abstract</span>　<span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h2><p>责任链模式（Chain Of Responsibility）：使多个对象都有机会处理请求，从而避免发送者与接受者之间的耦合关系。将这个对象连成一条链，并沿着这条链传递该对象，直到有一个对象处理它为止。<br><img src="http://pic002.cnblogs.com/images/2012/406683/2012082915050182.jpg" alt="责任链类结构图"></p>
+<h4 id="使用责任链模式的场合和优缺点"><a href="#使用责任链模式的场合和优缺点" class="headerlink" title="使用责任链模式的场合和优缺点"></a>使用责任链模式的场合和优缺点</h4><p><strong>使用责任链模式的场合</strong>：<br>个人觉得，责任链模式主要用于当一个请求有多种处理方式的时候，并且具体处理方式不确定的情况。</p>
+<p><strong>使用责任链模式的优点</strong>：</p>
+<ol>
+<li>增强了系统的可扩展性。</li>
+<li>使用责任链模式可以避免众多的if或者if-else语句。</li>
+<li>使用责任链模式可以减小对象之间的耦合性。使得对象之间的联系减小。</li>
+<li>可以根据需要自由组合工作流程。如工作流程发生变红，可以通过重新分配对象链便可以适应新的工作流程。</li>
+<li>责任的分担。每个类只需要处理自己该处理的工作（不该处理的传递给下一个对象完成），明确各类的责任范围，符合类的最小封装原则。</li>
+</ol>
+<p><strong>使用责任链模式的缺点</strong>：</p>
+<ol>
+<li>使用责任链模式的时候会有众多的处理者对象，但是实际使用的处理者对象却只有一个，这在某种程度讲是资源的浪费。</li>
+<li>同时责任链的建立的合理性要靠客户端来保证，增加了程序的复杂性，也有可能由于责任链导致出错。</li>
+</ol>
+<hr>
+<h2 id="MVC设计模式"><a href="#MVC设计模式" class="headerlink" title="MVC设计模式"></a>MVC设计模式</h2><p><img src="http://www.2cto.com/uploadfile/Collfiles/20150606/20150606093217164.jpg" alt="MVC模式图"><br>MVC是一种将业务逻辑、数据、界面分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。其中M层处理数据，业务逻辑等；V层处理显示结果；C层祈祷桥梁作用，来控制V层和M层的通信一次来达到分离视图显示和业务逻辑层。</p>
+<p>在Android中，按照我的理解：<br>Activity充当C层，数据请求（HTTP或数据库读写）充当M层，XML充当V层，不可避免的Activity中要有V层的部分代码，比如对M层进行逻辑请求获取到数据注入到V层中，V层直接依赖与M层。V层与C层之间可以通过定义接口来减少依赖，如果V层过于复杂（V随时可能发生变化），可以在V与M之间定义Adapter来减少依赖。</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/17/设计模式/" data-id="cittsidsb0005igumt5fjljd1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工程/">工程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作系统/">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/工程/" style="font-size: 10px;">工程</a> <a href="/tags/操作系统/" style="font-size: 10px;">操作系统</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/09/29/多线程模型/">多线程模型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/24/回溯法/">回溯法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/24/动态规划/">动态规划</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/18/排序算法/">排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/17/设计模式/">设计模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 雷凯<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

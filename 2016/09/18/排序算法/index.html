@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>排序算法 | 雷凯&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="常见排序算法小结
+直接插入排序
+思想：每次选择一个元素K插入到之前已排好序的部分A[1…i]中，插入过程中K依次由后向前与A[1…i]中的元素进行比较。若发现A[x]&amp;gt;=K，则将K插入到A[x]的后面，插入前需要移动元素。
+算法时间复杂度。 最好情况下：正序有序（从小到大），这样只需要比较n次，不需要移动。因此时间复杂度O(n)。 最坏情况下：逆序有序，这样每个元素就都需要比较n次，共有n个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序算法">
+<meta property="og:url" content="http://yoursite.com/2016/09/18/排序算法/index.html">
+<meta property="og:site_name" content="雷凯's Blog">
+<meta property="og:description" content="常见排序算法小结
+直接插入排序
+思想：每次选择一个元素K插入到之前已排好序的部分A[1…i]中，插入过程中K依次由后向前与A[1…i]中的元素进行比较。若发现A[x]&amp;gt;=K，则将K插入到A[x]的后面，插入前需要移动元素。
+算法时间复杂度。 最好情况下：正序有序（从小到大），这样只需要比较n次，不需要移动。因此时间复杂度O(n)。 最坏情况下：逆序有序，这样每个元素就都需要比较n次，共有n个">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201105/24/0_1306225542srVx.gif">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201105/24/0_13062255433oJI.gif">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201105/24/0_130622555127dJ.gif">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201105/24/0_1306225557eV2Y.gif">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201105/24/0_1306225561D6cL.gif">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201105/24/0_1306225564393a.gif">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201105/24/0_1306225570mW6M.gif">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201105/24/0_1306225575fKfh.gif">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201105/24/0_13062255771KD1.gif">
+<meta property="og:updated_time" content="2016-09-24T11:20:22.758Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="排序算法">
+<meta name="twitter:description" content="常见排序算法小结
+直接插入排序
+思想：每次选择一个元素K插入到之前已排好序的部分A[1…i]中，插入过程中K依次由后向前与A[1…i]中的元素进行比较。若发现A[x]&amp;gt;=K，则将K插入到A[x]的后面，插入前需要移动元素。
+算法时间复杂度。 最好情况下：正序有序（从小到大），这样只需要比较n次，不需要移动。因此时间复杂度O(n)。 最坏情况下：逆序有序，这样每个元素就都需要比较n次，共有n个">
+<meta name="twitter:image" content="http://hi.csdn.net/attachment/201105/24/0_1306225542srVx.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="雷凯&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">雷凯&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">随心 随笔</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-排序算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/18/排序算法/" class="article-date">
+  <time datetime="2016-09-18T03:23:10.000Z" itemprop="datePublished">2016-09-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      排序算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="常见排序算法小结"><a href="#常见排序算法小结" class="headerlink" title="常见排序算法小结"></a>常见排序算法小结</h2><p><img src="http://hi.csdn.net/attachment/201105/24/0_1306225542srVx.gif" alt="排序算法图"></p>
+<h3 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h3><ol>
+<li>思想：每次选择一个元素K插入到之前已排好序的部分A[1…i]中，插入过程中K依次由后向前与A[1…i]中的元素进行比较。若发现A[x]&gt;=K，则将K插入到A[x]的后面，插入前需要移动元素。<br><img src="http://hi.csdn.net/attachment/201105/24/0_13062255433oJI.gif" alt="插入结构图"></li>
+<li>算法时间复杂度。<br> 最好情况下：正序有序（从小到大），这样只需要比较n次，不需要移动。因此时间复杂度O(n)。 <br>最坏情况下：逆序有序，这样每个元素就都需要比较n次，共有n个元素，因此实际复杂度为O（n^{2}）。 <br>平均情况下：O(n^{2})。</li>
+<li>稳定性。<br>稳定性，就是有两个相同的元素，排序先后的相对位置是否变化，主要用在排序时有多个排序规则的情况下。<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3></li>
+<li>思想：希尔排序也是一种插入排序方法，实际上是一种分组插入方法先取定一个小于n的整数d1作为第一个增量，把表的全部记录分成d1个组，所有距离为d1的倍数的记录放在同一个组中，在各组内进行直接插入排序；然后，取第二个增量d2（&lt;d1），重复上述的分组和排序，直至所取的增量dt=1（dt&lt;dt-1&lt;…&lt;d2&lt;d1）,即所有记录放在同一组中进行直接插入排序为止。</li>
+<li>时间复杂度。<br>最好情况：与步长d的选择有很多关系。<br>最坏情况：O(N*logN)。 <br> 平均情况：O(N*logN)。</li>
+<li>稳定性。<br>每组插入排序是稳定的，但是相同元素在各组内是独立移动的，最后其稳定性就会被打乱，所有shell排序是不稳定的。<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3></li>
+<li>基本思想：通过无序区中相邻记录关键字间的比较和位置的交换，使关键字最小的记录如气泡一般逐渐往上“漂浮”直至“水面”。<br><img src="http://hi.csdn.net/attachment/201105/24/0_130622555127dJ.gif" alt="过程图"></li>
+<li>时间复杂度。<br>最好情况下：正序有序，则只需要比较n次。为O(n)。<br>最坏情况下：逆序有序，则需要比较(n-1)+(n-2)+…+1，故，为O(N*N)。</li>
+<li>稳定性。<br>排序过程中只交换相邻两个元素的位置。因此，当两个数相等时，是没必要交换两个数的位置的。所有，他们的相对位置并没有改变，冒泡排序算法是稳定的。<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3></li>
+<li>思想：由冒泡排序改进而来的。在待排序的n个记录中任取一个记录（通常去第一个记录），把该记录放入适当位置后，数据序列被此记录划分成两部分。所有关键字比该记录关键字小的记录放置在前一部分，所有比它大的记录放置在后一部分，并把该记录排在两部分的中间（称为该记录归位），这个过程称作一趟快速排序。<br><img src="http://hi.csdn.net/attachment/201105/24/0_1306225557eV2Y.gif" alt="排序过程图"></li>
+<li>算法复杂度。<br>最好的情况：因为每次都将序列分为两个部分，故为O(N*logN)。<br>最坏的情况：基本有序时，退化为冒泡排序，故为O(N*N)。</li>
+<li>稳定性。<br>由于每次都需要和中轴元素变换，因此原来的顺序就可能被打乱。如序列为5 3 3 4 3 8 9 10 11会将3的顺序打乱。所以，快速排序是不稳定的！<h3 id="直接选择排序"><a href="#直接选择排序" class="headerlink" title="直接选择排序"></a>直接选择排序</h3></li>
+<li>思想：首先在未排序序列中找到最小元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小元素，然后放到排序序列末尾。依次类推，直到所有元素均排序完成。具体做法是：选择最小的元素与未排序部分的首部交换，使得序列的前面为有序。<br><img src="http://hi.csdn.net/attachment/201105/24/0_1306225561D6cL.gif" alt="排序示意图"></li>
+<li>时间复杂度。<br>最好情况下：交换0次，但是每次都要找到最小的元素，因此大约必须遍历N*N次，因此为O(N*N)。减少了交换次数。<br>最坏情况下，平均情况下：O(N*N)</li>
+<li>稳定性。<br>由于每次都是选取未排序序列A中的最小元素X与A中的第一个元素交换，因此跨距离了，很可能破坏了元素间的相对位置（有交换后位置前的相同元素，但不是最小的），因此选择排序是不稳定的。<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3></li>
+<li>思想：利用完全二叉树中双亲节点和孩子节点之间的内在关系，在当前无序区中选择关键字最大（或者最小）的记录。<br><img src="http://hi.csdn.net/attachment/201105/24/0_1306225564393a.gif" alt=""></li>
+<li>算法复杂度<br>最坏情况下，接近于最差情况下：O(N*logN)。</li>
+<li>稳定性。<br>堆排序需要不断地调整堆，因此它是一种不稳定的排序。<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3></li>
+<li>思想：多次将两个或两个以上的有序表合并成一个新的有序表。<br><img src="http://hi.csdn.net/attachment/201105/24/0_1306225570mW6M.gif" alt=""></li>
+<li>算法时间复杂度。<br>最好情况下：一趟归并需要n次，总共需要logN次，因此为O（N*logN）。<br>最坏情况下，接近于平均情况下，为O(N*logN)</li>
+<li>稳定性。<br>归并排序最大的特点就是它是一种稳定的排序算法。归并过程中是不会改变元素的相对位置的。<br>缺点是：它需要O(n)的额外空间。但是很适合于多链表排序。<h3 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h3></li>
+<li>思想：它是一种非比较排序。它是根据位的高低进行排序的，也就是先按个位排序，然后依据十位排序…以次类推。<br><img src="http://hi.csdn.net/attachment/201105/24/0_1306225575fKfh.gif" alt=""><br><img src="http://hi.csdn.net/attachment/201105/24/0_13062255771KD1.gif" alt=""></li>
+<li>算法的时间复杂度。<br>分配需要O(n)，收集为O(r)，其中r为分配后链表的个数，以r=10为例，则有0~9这样10个链表来将原来的序列分类。而d，也就是位数，即“分配-收集”的趟数。因此时间复杂度为O(d*(n+r))</li>
+<li>稳定性。<br>基数排序过程中不改变元素的相对位置，因此是稳定的。</li>
+</ol>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/09/18/排序算法/" data-id="cittsids60003igumqokfbckc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/24/动态规划/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          动态规划
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/17/设计模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/工程/">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/操作系统/">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/工程/" style="font-size: 10px;">工程</a> <a href="/tags/操作系统/" style="font-size: 10px;">操作系统</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/09/29/多线程模型/">多线程模型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/24/回溯法/">回溯法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/24/动态规划/">动态规划</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/18/排序算法/">排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/17/设计模式/">设计模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 雷凯<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
